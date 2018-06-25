@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>juros compostos</title>
+    <style type="text/css">
+      
+#principal{
+    
+    width: 400px;
+    height: 450px;
+    background-color: gray;
+
+}
+
+
+    </style>
+    <script type="text/javascript">
+        window.onload= caio;
+
+/*A função Math.pow() retorna a base elevada ao expoente power, ou seja, baseexpoente. REFERÊNCIA: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/pow*/
+
+var juros=0;
+var inicial=0;
+var meses=0;var jurospm;
+var i;var montante;
+var calculando;
+var total; 
+var agregado; 
+var kill; 
+
+
+
+function caio(){
+
+    document.getElementById("botao").addEventListener("click",go);
+    document.getElementById("botao2").addEventListener("click",reset);
+    
+    
+
+}
+function reset(){
+    document.getElementById("inicial").value=""; 
+    document.getElementById("meses").value="";
+    document.getElementById("juros").value=""; 
+    document.getElementById("resultado").innerHTML=""; 
+    juros= 0; inicial =0; meses=0;
+}
+
+
+function go(){
+    inicial = document.getElementById("inicial").value;
+    meses = document.getElementById("meses").value;
+    juros = document.getElementById("juros").value;
+    total = document.getElementById("resultado");
+
+
+
+    console.log("TESTES inicial : "+inicial+" meses : "+ meses+" juros : "+juros);
+
+    if((juros==0)&(inicial==0)&(meses==0)){
+        }else{
+            jurospm= (juros/100.0)+1;
+            for(i=1; i<= meses; i++){
+                console.log("ate aqui foi 2");
+                calculando = Math.pow(jurospm, i); 
+                console.log("O resultado da elevação é: "+calculando);
+                montante = inicial* calculando;
+                agregado = montante - inicial; 
+                kill = (agregado*100)/inicial; 
+
+                
+                total.innerHTML +=+i+"º mês: Quantia relativa: "+montante.toFixed(2)+" R$<br>";
+
+            }
+        }
+
+}
+    </script>
+</head>
+<body>
+    <div id='principal'>
+        <h1>juros compostos</h1>
+        <span>valor inicial: </span> <input id="inicial" type="number" name="valor1" min="0.00" max="10000.00" step="1" value=""><br>
+        <span>Total de Meses(max=15): </span> <input id="meses" type="number" name="meses" value=""><br>
+        <span>Juros ao mês: </span> <input id="juros" type="number" name="juros" value=""><br>
+        <div id='bot'><button type= "button" id='botao' >resultado</button><br></div>
+        <div id='bot2'><button type= "button" id='botao2' >reiniciar</button><br></div>
+        <p id='resultado'></p>
+    </div>
+
+</body>
+</html>
